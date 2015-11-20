@@ -1,0 +1,49 @@
+<template name="chat">
+{{#if Template.subscriptionsReady}}
+  <aside id="chat" class="col-md-5 col-lg-5 homeside-r" >
+    <table class="table table-striped" id="table-scrollable" style="min-height: 300px;max-height:400px;">
+    {{#each messages}}
+    <tr>
+      <td class="icon-avatar">
+        <div class="icon-avatar-main">
+            <div class="icon-avatar-secondary"></div>
+        </div>
+      </td>
+      {{#if isServer userId}}
+      <td class="id-user" style="color:red;">Server</td>
+      <td class="message-user">{{message}}</td>
+      {{else}}
+      <td class="id-user">{{getUsername userId}}</td>
+      <!-- Mention color HardCoded here, please change it -->
+      <style type="text/css">.mention{background-color: #2F2F2F;color:blue;}</style>
+      <td class="message-user {{#if isMention message}}mention{{/if}}">{{message}}</td>
+      {{/if}}
+    </tr>
+    {{/each}}
+    </table>
+    <div class="input-wrapper">
+      <span class=" icon-avatar-main"></span>
+      {{#if currentUser}} 
+      <!-- Mention color HardCoded here, please change it -->
+      <style type="text/css">#self-comment.locked{color: red;}</style>
+     <textarea type="text" id="self-comment" placeholder="Ajouter un commentaire..." maxlength="140"></textarea>
+      {{else}}
+        <input type="text" id="must-connection" value="Veuillez vous connectez" maxlength="140"  />
+      {{/if}}
+    </div>
+    <div class="wrapper-l">
+      <div class="avatar-cinema"></div>
+        <div class="input-wrapper-cinema">
+          {{#if currentUser}}
+          <textarea type="text" id="self-comment" placeholder="Ajouter un commentaire..." maxlength="140"> </textarea> 
+          <span class="limit-caracter"><b class="caracter-left" value="">140</b>/140</span>
+          {{else}}
+          <input type="text" id="self-comment" value="Veuillez vous connectez" maxlength="140"  />
+          {{/if}}
+        </div>
+    </div>
+  </aside>
+{{else}}
+Loading chat..
+{{/if}}
+</template>

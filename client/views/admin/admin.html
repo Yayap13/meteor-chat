@@ -1,0 +1,52 @@
+<template name="admin">
+
+    <div class="container-admin">
+    	<div>
+    		Programme selectionné: {{#with getElement}}{{title}}: {{description}}{{/with}} <span class="delThisProg">Supprimer ce programme</span>
+    	</div>
+    	<div>
+    		Ajouter un nouveau programme<br>
+    		<input class="newTitle" type="text" placeholder="titre">
+    		<textarea class="newDesc" placeholder="description"></textarea>
+    		<input class="newCover" type="text" placeholder="lien de l'image de Cover">
+    		<input class="newLogo" type="text" placeholder="lien du logo du jeu">
+    		<span class="newAdd">AJOUTER</span>
+    	</div>
+    	<div>
+	    	Programmes:
+	    	<select>
+	    	<option></option>
+	    	{{#each elements}}
+	    		<option class="prog">{{title}}</option>
+	    	{{/each}}
+	    	</select>
+	    </div>
+
+	    {{#if getElement}}
+	    <div>
+	    	Ajouter au programme:<br>
+	    	Jour: 
+	    	<select>
+	    		<option></option>
+	    	{{#each days}}
+	    		<option class="day">{{day}}</option>
+	    	{{/each}}
+	    	</select><br>
+	    	Heure de <input class="start" type="number"> à <input class="end" type="number"> (heure au format "1700" pour 17h00, 0130 pour 1h00)<br>
+	    	<input type="checkbox" class="force"> Forcer l'ajout du programme à la fin? (utile lorsque tu ajoutes des programmes après minuit!)
+	    </div>
+	    <div class="addProgramme">Ajouter ce programme</div>
+	    {{/if}}
+
+	    Supprimer le programme COMPLET d'un jour:
+	    <select>
+	    	<option></option>
+	    {{#each days}}
+	    	<option class="dayRemove">{{day}}</option>
+	    {{/each}}
+	    </select>
+	    <div class="delProg">Supprimer ce jour</div>
+    	
+	</div>
+	
+</template>
